@@ -207,7 +207,12 @@ export function estimateResale(view: PublicCarView): ResaleEstimate {
   if (k.serviceEvidence === "unknown") caveats.push("Service history not verified.");
 
   const low = Math.max(0, roundTo(Math.max(floor * 0.8, likely - down), 5000));
-  const high = roundTo(Math.max(likely * 1.05, documented * 1.04), 5000);
+  // Best case: no hidden faults and, if unverified, a full logbook.
+  const bestCase =
+    k.serviceEvidence === "unknown"
+      ? Math.round((documented * SERVICE_FACTORS["logbook-sighted"]) / SERVICE_FACTORS.unknown)
+      : documented;
+  const high = roundTo(Math.max(likely * 1.05, bestCase * 1.03), 5000);
   const confidence = baseUnc <= 0.06 && unexplained.size === 0 ? "high" : baseUnc <= 0.1 ? "medium" : "low";
   return { lowCents: low, likelyCents: roundTo(likely, 5000), highCents: high, caveats, confidence };
 }

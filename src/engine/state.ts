@@ -60,7 +60,7 @@ export const ConfirmedFaultSchema = z.object({
   faultId: z.string(),
   typeId: z.string(),
   severity: SeveritySchema,
-  source: z.enum(["visual", "testDrive", "ppi", "diagnosis", "seller"]),
+  source: z.enum(["visual", "testDrive", "ppi", "diagnosis", "seller", "listing"]),
   day,
   repaired: z.boolean(),
 });

@@ -138,7 +138,7 @@ export function generateCar(
     faultId: f.id,
     typeId: f.typeId,
     severity: f.severity,
-    source: "seller" as const,
+    source: "listing" as const,
     day: ctx.day,
     repaired: false,
   }));

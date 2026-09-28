@@ -13,7 +13,8 @@
     "test:e2e": "playwright test",
     "simulate": "tsx scripts/simulate-economy.ts",
     "verify:images": "tsx scripts/verify-images.ts",
-    "verify": "npm run typecheck && npm test && npm run build && npm run test:e2e"
+    "verify": "npm run typecheck && npm test && npm run build && npm run test:e2e",
+    "verify:release": "npm run verify && npm run verify:images"
   },
   "dependencies": {
     "next": "^16.3.6",

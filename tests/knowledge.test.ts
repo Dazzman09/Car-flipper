@@ -33,7 +33,7 @@ describe("truth versus player knowledge", () => {
   it("seller claims are stored as unverified claims, not facts", () => {
     const { state, car } = findGame((c) => c.knowledge.claims.some((cl) => cl.topic === "mechanical"));
     // Only faults the seller disclosed in the listing start out known.
-    expect(car.knowledge.confirmedFaults.every((f) => f.source === "seller")).toBe(true);
+    expect(car.knowledge.confirmedFaults.every((f) => f.source === "listing")).toBe(true);
     for (const f of car.knowledge.confirmedFaults) {
       expect(car.truth.faults.find((x) => x.id === f.faultId)!.sellerDisclosed).toBe(true);
     }
