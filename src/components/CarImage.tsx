@@ -9,6 +9,11 @@ import { getVariant, type BodyStyle } from "@/engine/catalogue/variants";
  * drawn from the same configuration (body style and colour), so the picture
  * can never contradict the listing.
  */
+/** Prefix a /public path with the deployment base path (GitHub Pages serves from a subfolder). */
+function assetUrl(src: string): string {
+  return src.startsWith("/") ? `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${src}` : src;
+}
+
 export function CarImage({ imageSetId, size = "md" }: { imageSetId: string; size?: "sm" | "md" | "lg" }) {
   const set = getImageSet(imageSetId);
   const variant = getVariant(set.variantId);
@@ -20,7 +25,7 @@ export function CarImage({ imageSetId, size = "md" }: { imageSetId: string; size
     return (
       <figure className="overflow-hidden rounded-lg bg-ink/5" data-testid="car-photo" data-image-set={set.id}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={photo.src} alt={alt} className={`w-full object-cover ${height}`} loading="lazy" />
+        <img src={assetUrl(photo.src)} alt={alt} className={`w-full object-cover ${height}`} loading="lazy" />
         {size !== "sm" && photo.attribution && (
           <figcaption className="px-2 py-1 text-[10px] leading-tight text-muted">
             {photo.source.pageUrl ? (

@@ -16,6 +16,12 @@ npm run dev          # http://localhost:3000
 
 Add `?seed=123` to the URL before starting a career for a reproducible world.
 
+## Play online
+
+GitHub Pages: https://dazzman09.github.io/Car-flipper/ — rebuilt by
+`.github/workflows/pages.yml` on every push to `main`. To build the static site
+locally: `PAGES_BASE_PATH=/Car-flipper npm run build` (output in `out/`).
+
 ## Checks
 
 ```bash
